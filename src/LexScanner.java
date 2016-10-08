@@ -62,20 +62,34 @@ public class LexScanner {
 			}
 		}
 		else if(current.isEmpty() && Character.isDigit(c)){
+			Scanner s2 = new Scanner(System.in);
 			while(Character.isDigit(c)){
 				current = current +c;
+				s2 = s;
 				c = s.next(".").charAt(0);
 			}
+			s=s2;
 			return Arrays.asList(keywords).indexOf("integer");
 		}
 		else if(Character.isAlphabetic(c)){
 			current = current+ c;
-			for(int i =0;i<7;i++){
-				if(keywords[i].equals(current)){
-					return i;
+			c = s.next(".").charAt(0);
+			Scanner s4 = new Scanner(System.in);
+			while(Character.isLetterOrDigit(c)){
+				current = current +c;
+				for(int i =0;i<7;i++){
+					Scanner s3 = new Scanner(System.in);
+					s3 = s;
+					if(keywords[i].equals(current) && !Character.isLetterOrDigit(s.next(".").charAt(0))){
+						s = s3;
+						return i;
+					}
 				}
+				s4 = s;
+				c = s.next(".").charAt(0);
 			}
-			lex();
+			s = s4;
+			return Arrays.asList(keywords).indexOf("variable"); 
 		}
 		return -1;
 	}
