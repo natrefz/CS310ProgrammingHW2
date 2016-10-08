@@ -98,6 +98,6 @@ public class LexScanner {
 	}
 
 	public boolean endOfFile() {
-		return true;
+		return s.hasNext(".");
 	}
 }
